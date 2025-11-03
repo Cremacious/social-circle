@@ -2,7 +2,7 @@ import { currentUser } from '@clerk/nextjs/server';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { SignInButton, SignUpButton } from '@clerk/nextjs';
 import { Button } from './ui/button';
-// import { getUserByClerkId } from '@/actions/user.action';
+import { getUserByClerkId } from '@/actions/user.action';
 import Link from 'next/link';
 import { Avatar, AvatarImage } from './ui/avatar';
 import { Separator } from './ui/separator';
@@ -12,22 +12,9 @@ async function Sidebar() {
   const authUser = await currentUser();
   if (!authUser) return <UnAuthenticatedSidebar />;
 
-  //   const user = await getUserByClerkId(authUser.id);
-  //   if (!user) return null;
+    const user = await getUserByClerkId(authUser.id);
+    if (!user) return null;
 
-  const user = {
-    username: 'Mack',
-    name: 'chris',
-    image:
-      'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fvectors%2Fblank-profile-picture-mystery-man-973460%2F&psig=AOvVaw1qLbZgepZ_U01lV5Mja64e&ust=1762275634465000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCOj3gLu61pADFQAAAAAdAAAAABAE',
-    bio: 'Full-stack developer passionate about building amazing user experiences',
-    _count: {
-      following: 42,
-      followers: 128,
-    },
-    location: 'San Francisco, CA',
-    website: 'https://mackdev.com',
-  };
 
   return (
     <div className="sticky top-20">
